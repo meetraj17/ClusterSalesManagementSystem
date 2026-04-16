@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ClusterSalesManagementSystem.Models.Sales>
+
+@{
+    ViewData["Title"] = "SalesList";
+}
+
+<h1>SalesList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+        @*     <th>
+                @Html.DisplayNameFor(model => model.SalesCluId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.SalesAmount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InvoiceUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          @*   <td>
+                @Html.DisplayFor(modelItem => item.SalesCluId)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InvoiceUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalesDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SalesId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SalesId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SalesId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
