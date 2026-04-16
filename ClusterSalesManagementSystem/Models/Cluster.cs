@@ -10,5 +10,9 @@ namespace ClusterSalesManagementSystem.Models
         public int CluId { get; set; }
         [Column("CluName", TypeName = "Nvarchar(100)")]
         public string? CluName { get; set; }
+        [Column("CluUserId", TypeName = "Numeric(18,0)")]
+        public int CluUserId { get; set; }
+        [ForeignKey("CluUserId")]
+        public User User { get; set; }
     }
 }

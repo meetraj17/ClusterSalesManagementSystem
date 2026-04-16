@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ClusterSalesManagementSystem.Models.Cluster>
+
+@{
+    ViewData["Title"] = "ClusterList";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<h2>Cluster List Page</h2>
+@if (TempData["DeleteMessage"]!=null)
+{
+    <label class="alert-danger">@TempData["DeleteMessage"]</label>
+}
+
+<div class="card shadow-sm" style="border-radius:15px;">
+
+    <div class="card-header d-flex justify-content-between align-items-center"
+         style="background: linear-gradient(90deg,#4e73df,#224abe); color:white; border-radius:15px 15px 0 0;">
+
+        <h5 class="mb-0">📊 Cluster List</h5>
+
+        <a asp-action="CreateCluster" class="btn btn-light btn-sm">
+            ➕ Add Cluster
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover align-middle text-center">
+
+            <thead class="table-light">
+                <tr>
+                    <th>Cluster Name</th>
+                    <th>User Name</th>
+                    <th style="width:150px;">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td class="fw-semibold">
+                            @item.CluName
+                        </td>
+
+                        <td>
+                            <span class="fw-semibold">
+                                @item.User?.UserName
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+
+                                <a asp-action="CreateCluster" asp-route-id="@item.CluId"
+                                   class="btn btn-warning btn-sm"
+                                   title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.CluId"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Are you sure you want to delete this record?')"
+                                   title="Delete">
+                                    <i class="bi bi-trash-fill"></i>
+                                </a>
+
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

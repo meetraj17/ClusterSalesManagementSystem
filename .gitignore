@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /ClusterSalesManagementSystem/appsettings.json
 /ClusterSalesManagementSystem/appsettings.json
+/ClusterSalesManagementSystem/appsettings.json
+/ClusterSalesManagementSystem/appsettings.Development.json

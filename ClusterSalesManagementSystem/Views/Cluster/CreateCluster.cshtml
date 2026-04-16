@@ -1,0 +1,130 @@
+﻿@model ClusterSalesManagementSystem.Models.Cluster
+
+@{
+    ViewData["Title"] = "CreateCluster";
+}
+@* <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> *@
+<style>
+    .ui-autocomplete {
+        background: #fff;
+        border: 1px solid #ccc;
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 9999 !important;
+        list-style: none;
+        padding-left: 0 !important;
+        margin: 0;
+    }
+
+    .ui-menu-item-wrapper {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .ui-state-active {
+        background: #4e73df !important;
+        color: #fff !important;
+        border: none;
+    }
+
+    .ui-menu-item {
+        list-style: none !important;
+    }
+
+    .ui-helper-hidden-accessible {
+        display: none !important;
+    }
+</style>
+<hr />
+<div class="text-end">
+    <a asp-action="ClusterList" class="btn btn-secondary btn-sm">
+        ← Back to List
+    </a>
+</div>
+<div class="container d-flex justify-content-center">
+    <div class="col-md-5">
+
+        <div class="card shadow-lg mt-4" style="border-radius:15px;">
+
+            <!-- HEADER -->
+            <div class="card-header text-center"
+                 style="background: linear-gradient(90deg,#4e73df,#224abe); color:white; border-radius:15px 15px 0 0;">
+
+                <h4 class="mb-0">
+                    @(Model.CluId == 0 ? "➕ Create Cluster" : "✏️ Edit Cluster")
+                </h4>
+            </div>
+
+            <!-- BODY -->
+            <div class="card-body">
+
+                <form asp-action="CreateCluster" method="post">
+
+                    <input type="hidden" asp-for="CluId" />
+
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">Cluster Name</label>
+                        <input asp-for="CluName" class="form-control" placeholder="Enter Cluster" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="fw-semibold">User</label>
+                        <input type="text" id="txtUser" class="form-control"
+                               placeholder="User"
+                               value="@Model.User?.UserName" />
+                        <input type="hidden" asp-for="CluUserId" id="hdnUserId" />
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+
+
+                        <button type="submit" class="btn btn-primary px-4">
+                            Submit
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @* @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} *@
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <script>
+        var $j = jQuery.noConflict();
+
+        $j(function () {
+            $j("#txtUser").autocomplete({
+                source: function (request, response) {
+                    $j.ajax({
+                        url: '/Cluster/SearchUsers',
+                        data: { term: request.term },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    $j("#txtUser").val(ui.item.label);   // show name
+                    $j("#hdnUserId").val(ui.item.id); // store id
+                    return false;
+                },
+
+                open: function () {
+                    $j(this).autocomplete("widget").css({
+                        "width": $j(this).outerWidth() + "px"
+                    });
+                }
+            });
+        });
+    </script>
+}

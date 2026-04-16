@@ -34,10 +34,12 @@ namespace ClusterSalesManagementSystem.Controllers
 
             var user = new User
             {
-                UserName = model.UserName
+                UserName = model.UserName,
+                UserRole=model.UserRole,
             };
 
             await service.Register(user, model.Password);
+            TempData["RegisterMessage"] = "Register Successfully...";
 
             return RedirectToAction("Login");
         }
@@ -84,6 +86,7 @@ namespace ClusterSalesManagementSystem.Controllers
             // Redirect to Dashboard
             return RedirectToAction("SalesList", "Sales");
         }
+
         private string GenerateToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecureJwtKey_123456789012345"));

@@ -37,5 +37,11 @@ namespace ClusterSalesManagementSystem.Repository.Implement
             context.Set<T>().Remove(data);
             await context.SaveChangesAsync();
         }
+        public async Task<List<Cluster>> GetAllWithUser()
+        {
+            return await context.Clusters
+                .Include(x => x.User)
+                .ToListAsync();
+        }
     }
 }
