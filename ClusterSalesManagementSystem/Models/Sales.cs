@@ -17,5 +17,7 @@ namespace ClusterSalesManagementSystem.Models
         [Column("InvoiceUrl", TypeName = "Nvarchar(100)")]
         public string? InvoiceUrl { get; set; }
         public DateTime SalesDate { get; set; }
+        [ForeignKey("SalesCluId")]
+        public Cluster cluster { get; set; }
     }
 }

@@ -12,28 +12,47 @@
     <div class="col-md-4">
         <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-         @*    <div class="form-group">
-                <label asp-for="SalesCluId" class="control-label"></label>
-                <input asp-for="SalesCluId" class="form-control" />
-                <span asp-validation-for="SalesCluId" class="text-danger"></span>
-            </div> *@
+            <input type="hidden" asp-for="SalesId" />
             <div class="form-group">
-                <label asp-for="SalesAmount" class="control-label"></label>
+                <label asp-for="SalesCluId" class="control-label">Cluster (Region/Area)</label>
+                <select asp-for="SalesCluId" class="form-control form-select">
+                    <option value="0">-- Select --</option>
+                    @foreach (var item in ViewBag.ClustersList)
+                    {
+                        <option value="@item.CluId">@item.CluName</option>
+                    }
+                </select>
+                <span asp-validation-for="SalesCluId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalesAmount" class="control-label">Amount</label>
                 <input asp-for="SalesAmount" class="form-control" />
                 <span asp-validation-for="SalesAmount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="InvoiceUrl" class="control-label"></label>
+                <label asp-for="InvoiceUrl" class="control-label">Invoice Docs</label>
                 <input asp-for="InvoiceUrl" type="file" name="file" class="form-control" />
+                <input type="hidden" asp-for="InvoiceUrl" />
+                @if (Model != null)
+                {
+                    @if (!string.IsNullOrEmpty(Model.InvoiceUrl))
+                    {
+                        <div>
+                            <a href="@Url.Content(Model.InvoiceUrl)" style="text-decoration:none" target="_blank">
+                                <i class="fa fa-eye"></i> View File
+                            </a>
+                        </div>
+                    }
+                }
                 <span asp-validation-for="InvoiceUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SalesDate" class="control-label"></label>
+                <label asp-for="SalesDate" class="control-label">Date</label>
                 <input asp-for="SalesDate" type="date" class="form-control" />
                 <span asp-validation-for="SalesDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -44,5 +63,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

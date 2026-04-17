@@ -10,6 +10,7 @@ namespace ClusterSalesManagementSystem.Repository.Interface
         Task Update(T entity);
         Task Delete(int id);
         Task<List<Cluster>> GetAllWithUser();
+        Task<List<Sales>> GetAllWithCluster();
 
     }
 }

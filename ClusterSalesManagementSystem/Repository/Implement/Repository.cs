@@ -43,5 +43,11 @@ namespace ClusterSalesManagementSystem.Repository.Implement
                 .Include(x => x.User)
                 .ToListAsync();
         }
+        public async Task<List<Sales>> GetAllWithCluster()
+        {
+            return await context.Sales
+                .Include(x => x.cluster)
+                .ToListAsync();
+        }
     }
 }

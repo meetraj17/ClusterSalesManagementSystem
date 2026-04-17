@@ -1,10 +1,12 @@
 ﻿using ClusterSalesManagementSystem.Models;
 using ClusterSalesManagementSystem.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClusterSalesManagementSystem.Controllers
 {
+    [Authorize]
     public class ClusterController : Controller
     {
         private readonly IRepository<Cluster> repo;
