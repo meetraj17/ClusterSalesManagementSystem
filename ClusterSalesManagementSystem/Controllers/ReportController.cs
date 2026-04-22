@@ -26,7 +26,7 @@ namespace ClusterSalesManagementSystem.Controllers
             string connStr = configuration.GetConnectionString("dbcs");
 
             using (SqlConnection con = new SqlConnection(connStr))
-            {
+            { 
                 using (SqlCommand cmd = new SqlCommand("GetSalesReport_Sp", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
