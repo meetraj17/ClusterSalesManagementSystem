@@ -31,6 +31,9 @@
                             <a class="nav-link text-white" asp-controller="Cluster" asp-action="ClusterList">🗺️ Cluster</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" asp-controller="Report" asp-action="ReportView">Sales Report</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-warning fw-bold" asp-controller="User" asp-action="Logout">🚪 Logout</a>
                         </li>
                     </ul>
@@ -57,7 +60,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js"></script>
-  
+
 
     @await RenderSectionAsync("Scripts", required: false)
 

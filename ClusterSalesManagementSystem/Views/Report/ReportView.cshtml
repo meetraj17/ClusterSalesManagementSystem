@@ -1,0 +1,55 @@
+﻿@model ClusterSalesManagementSystem.ViewModel.SalesReportVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<form asp-action="ReportView" method="get" class="row g-3">
+
+    <div class="col-md-3">
+        <input asp-for="FromDate" type="date" class="form-control" />
+    </div>
+
+    <div class="col-md-3">
+        <input asp-for="ToDate" type="date" class="form-control" />
+    </div>
+
+    <div class="col-md-3">
+        <select asp-for="ClusterId" class="form-control" asp-items="ViewBag.Clusters">
+            <option value="">All Clusters</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100" asp-action="ReportView">GO</button>
+    </div>
+
+</form>
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>Cluster</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.SalesList != null && Model.SalesList.Any())
+        {
+            @foreach (var item in Model.SalesList)
+            {
+                <tr>
+                    <td>@item.CluName</td>
+                    <td>@item.Amount</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" class="text-center text-danger">
+                    No data found
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
